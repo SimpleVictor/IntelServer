@@ -26,13 +26,12 @@ board.on("ready", function() {
         controller: "JHD1313M1"
     });
 
-    lcd.useChar("heart");
 
-    lcd.cursor(0, 0).print("hello :heart:");
+    // set up the LCD's number of columns and rows:
+    lcd.begin(16, 2);
+    // Print a message to the LCD.
+    lcd.print("hello, world!");
 
-    lcd.blink();
-
-    lcd.cursor(1, 0).print("Blinking? ");
 
     var motion = new five.Motion(6);
 
