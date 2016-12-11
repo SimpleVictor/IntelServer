@@ -15,7 +15,7 @@ router.get('/home', function(req, res, next) {
         url: 'https://wrinkle-8419a.firebaseio.com/Listener/InHouseUser/.json',
         method: "PATCH",
         body: obj,
-    }, function(err, responses){
+    }, function(err, response){
         if(err){
             console.log("There was an error");
             response.json("FAILED");
@@ -42,7 +42,7 @@ router.get('/nothome', function(req, res, next) {
         url: 'https://wrinkle-8419a.firebaseio.com/Listener/InHouseUser/.json',
         method: "PATCH",
         body: obj,
-    }, function(err, responses){
+    }, function(err, response){
         if(err){
             console.log("There was an error");
             response.json("FAILED");
