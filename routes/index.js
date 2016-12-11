@@ -56,6 +56,7 @@ function countDown(){
     count--;
     if(count <= 0){
         UserIsNotInside();
+        count = 10;
         isUserInside = false;
     }
 };
