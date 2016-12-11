@@ -26,6 +26,8 @@ board.on("ready", function() {
         controller: "JHD1313M1"
     });
 
+    lcd.clear();
+
 
     // set up the LCD's number of columns and rows:
     lcd.cursor(0, 0);
