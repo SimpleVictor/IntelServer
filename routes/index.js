@@ -21,6 +21,13 @@ var isUserInside = false;
 
 board.on("ready", function() {
 
+
+    var lcd = new five.LCD({
+        controller: "JHD1313M3"
+    });
+
+    lcd.bgColor("yellow");
+
     var motion = new five.Motion(6);
 
     motion.on("calibrated", function() {
