@@ -18,12 +18,10 @@ router.get('/home', function(req, res, next) {
     }, function(err, response){
         if(err){
             console.log("There was an error");
-            response.json("FAILED");
             res.json("failed");
 
         }else{
             console.log("Successfully added into db");
-            response.json("done");
             res.json("It works");
         };
     });
@@ -45,12 +43,10 @@ router.get('/nothome', function(req, res, next) {
     }, function(err, response){
         if(err){
             console.log("There was an error");
-            response.json("FAILED");
             res.json("failed");
 
         }else{
             console.log("Successfully added into db");
-            response.json("done");
             res.json("It works");
         };
     });
