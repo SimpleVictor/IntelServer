@@ -6,6 +6,7 @@ var Edison = require("edison-io");
 var board = new five.Board({
     io: new Edison()
 });
+var requests = require('request');
 
 board.on("ready", function() {
 
@@ -20,7 +21,24 @@ board.on("ready", function() {
     // "motionstart" events are fired when the "calibrated"
     // proximal area is disrupted, generally by some form of movement
     motion.on("motionstart", function() {
-        console.log("motionstart");
+        console.log("motionstart")
+
+
+        // requests({
+        //     url: `https://wrinkle-8419a.firebaseio.com/`,
+        //     method: "GET",
+        // }, function(err, responses){
+        //     if(err){
+        //         console.log("There was an error");
+        //         response.json("FAILED");
+        //
+        //     }else{
+        //         console.log("Successfully added into db");
+        //         response.json("done");
+        //     };
+        // });
+
+
     });
 
     // "motionend" events are fired following a "motionstart" event
