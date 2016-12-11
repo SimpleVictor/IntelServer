@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var requests = require('requets');
+var requests = require('request');
 
 /* GET users listing. */
 
