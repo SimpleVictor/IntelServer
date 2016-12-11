@@ -31,7 +31,7 @@ board.on("ready", function() {
 
     var counter = 0;
 
-    while(counter <== 10){
+    while(counter <= 10){
         setTimeout(function(){
             lcd.blink();
         }, 1000);
