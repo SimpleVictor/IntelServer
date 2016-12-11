@@ -29,9 +29,17 @@ board.on("ready", function() {
 
     lcd.bgColor("#FF0000");
 
-    setTimeout(function(){
-        lcd.clear().cursor(0,0).print("hellloooooo");
-    }, 5000);
+    var counter = 0;
+
+    while(counter <== 10){
+        setTimeout(function(){
+            lcd.blink();
+        }, 1000);
+    };
+
+    // setTimeout(function(){
+    //     lcd.clear().cursor(0,0).print("hellloooooo");
+    // }, 5000);
 
 
     // // set up the LCD's number of columns and rows:
