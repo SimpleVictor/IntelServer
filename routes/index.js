@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var NanoTimer = require('nanotimer');
+
 var five = require("johnny-five");
 var Edison = require("edison-io");
 var board = new five.Board({
@@ -8,52 +10,103 @@ var board = new five.Board({
 });
 var requests = require('request');
 
+
+
+
+var timer = new NanoTimer();
+timer.setInterval(countDown, '', '1s');
+var count = '10';
+
+var isUserInside = false;
+
 board.on("ready", function() {
 
-    // Create a new `motion` hardware instance.
     var motion = new five.Motion(6);
 
-    // "calibrated" occurs once, at the beginning of a session,
     motion.on("calibrated", function() {
         console.log("calibrated");
     });
 
-    // "motionstart" events are fired when the "calibrated"
-    // proximal area is disrupted, generally by some form of movement
+
+
+
     motion.on("motionstart", function() {
+        if(!isUserInside){
+            UserIsInside()
+        }
+
         console.log("motionstart")
-
-
-        // requests({
-        //     url: `https://wrinkle-8419a.firebaseio.com/`,
-        //     method: "GET",
-        // }, function(err, responses){
-        //     if(err){
-        //         console.log("There was an error");
-        //         response.json("FAILED");
-        //
-        //     }else{
-        //         console.log("Successfully added into db");
-        //         response.json("done");
-        //     };
-        // });
-
-
+        isUserInside = true;
+        count = 10;
     });
 
-    // "motionend" events are fired following a "motionstart" event
-    // when no movement has occurred in X ms
+
     motion.on("motionend", function() {
         console.log("motionend");
+        if(count <= 1){
+            timer.setInterval(countDown, '', '1s');
+        }
     });
 
-    // "data" events are fired at the interval set in opts.freq
-    // or every 25ms. Uncomment the following to see all
-    // motion detection readings.
-    // motion.on("data", function(data) {
-    //   console.log(data);
-    // });
+
 });
+
+function countDown(){
+    console.log("The count is " + count);
+    count--;
+    if(count <= 0){
+        UserIsNotInside();
+        isUserInside = false;
+    }
+};
+
+
+
+
+
+
+
+function UserIsNotInside(){
+    var obj = {
+        active: '1',
+        respond: 'user is not home'
+    }
+
+    requests({
+        url: 'https://wrinkle-8419a.firebaseio.com/Listener/InHouseUser/.json',
+        method: "PATCH",
+        body: obj,
+        json: true,
+    }, function(err, response){
+        if(err){
+            console.log(err);
+            console.log("There was an error");
+        }else{
+            console.log("Successfully added into db");
+        };
+    });
+}
+
+function UserIsInside(){
+    var obj = {
+        active: '1',
+        respond: 'user is home'
+    }
+
+    requests({
+        url: 'https://wrinkle-8419a.firebaseio.com/Listener/InHouseUser/.json',
+        method: "PATCH",
+        body: obj,
+        json: true,
+    }, function(err, response){
+        if(err){
+            console.log(err);
+            console.log("There was an error");
+        }else{
+            console.log("Successfully added into db");
+        };
+    });
+}
 
 
 /* GET home page. */
