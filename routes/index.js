@@ -26,9 +26,13 @@ board.on("ready", function() {
         controller: "JHD1313M1"
     });
 
-    lcd.bgColor("#ff0000");
-    lcd.cursor(0, 0).print("Hello");
-    lcd.cursor(1, 0).print("World!");
+    lcd.useChar("heart");
+
+    lcd.cursor(0, 0).print("hello :heart:");
+
+    lcd.blink();
+
+    lcd.cursor(1, 0).print("Blinking? ");
 
     var motion = new five.Motion(6);
 
