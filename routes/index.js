@@ -26,13 +26,18 @@ board.on("ready", function() {
         controller: "JHD1313M1"
     });
 
-    lcd.clear();
+
+    lcd.bgColor("#FF0000");
+
+    setTimeout(function(){
+        lcd.clear().cursor(0,0).print("hellloooooo");
+    }, 5000);
 
 
-    // set up the LCD's number of columns and rows:
-    lcd.cursor(0, 0);
-    // Print a message to the LCD.
-    lcd.print("hello, world!");
+    // // set up the LCD's number of columns and rows:
+    // lcd.cursor(0, 0);
+    // // Print a message to the LCD.
+    // lcd.print("hello, world!");
 
 
     var motion = new five.Motion(6);
